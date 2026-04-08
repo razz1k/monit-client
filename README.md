@@ -4,7 +4,7 @@ This directory contains everything that should run on each monitored VPS.
 
 ## Components
 
-- `node_exporter` for host metrics (internal Docker network only)
+- `node_exporter` for host metrics (internal Docker network only; `uts: host` so Grafana “Nodename” matches the real hostname)
 - `systemd_exporter` for systemd unit metrics (internal Docker network only)
 - `nginx` (`metrics-proxy`) exposes **one** public port `9443` and routes:
   - `/metrics/node` → `node_exporter`
