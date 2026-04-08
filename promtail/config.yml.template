@@ -13,7 +13,7 @@ scrape_configs:
       - targets: [localhost]
         labels:
           job: varlogs
-          host: HOSTNAME_PLACEHOLDER
+          host: __LOG_HOST__
           __path__: /var/log/**/*.log
 
   - job_name: docker
@@ -21,5 +21,5 @@ scrape_configs:
       - targets: [localhost]
         labels:
           job: docker
-          host: HOSTNAME_PLACEHOLDER
+          host: __LOG_HOST__
           __path__: /var/lib/docker/containers/*/*-json.log

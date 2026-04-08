@@ -15,10 +15,12 @@ services:
     container_name: promtail
     environment:
       MONITORING_SERVER_IP: ${MONITORING_SERVER_IP:?set MONITORING_SERVER_IP in .env}
+      LOG_HOST: ${LOG_HOST:?set LOG_HOST in .env}
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
-        sed "s|__MONITORING_SERVER_IP__|$${MONITORING_SERVER_IP}|g" \
+        sed -e "s|__MONITORING_SERVER_IP__|$${MONITORING_SERVER_IP}|g" \
+            -e "s|__LOG_HOST__|$${LOG_HOST}|g" \
           /etc/promtail/config.yml.template > /tmp/promtail-config.yml && \
         exec /usr/bin/promtail -config.file=/tmp/promtail-config.yml
     volumes:
