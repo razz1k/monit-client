@@ -15,14 +15,16 @@ This directory contains everything that should run on each monitored VPS.
 
 - `docker-compose.yml` - VPS services
 - `nginx/nginx.conf` - reverse proxy for scrape endpoints
-- `promtail/config.yml` - promtail client configuration
+- `promtail/config.yml.template` - promtail config template (`MONITORING_SERVER_IP` from `.env`)
+- `.env` - set `MONITORING_SERVER_IP` (not committed); copy from `.env.example`
 
 ## Quick start
 
-1. Adjust `promtail/config.yml`:
-   - replace `MONITORING_SERVER_IP` with your central server IP
-   - optionally update log paths/labels
-2. Start services:
+1. Create `.env` and set the central Loki host:
+   - `cp .env.example .env`
+   - `MONITORING_SERVER_IP` — IP or DNS of the monitoring server where Loki listens on `3100`
+2. Optionally edit `promtail/config.yml.template` (log paths, `HOSTNAME_PLACEHOLDER` for the `host` label).
+3. Start services:
 
 ```bash
 docker compose up -d
