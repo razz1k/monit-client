@@ -31,9 +31,7 @@ services:
     volumes:
       - /run/systemd:/run/systemd:ro
       - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket:ro
-      - /proc:/host/proc:ro
     command:
-      - "--path.procfs=/host/proc"
       - "--web.listen-address=0.0.0.0:9558"
     restart: unless-stopped
     networks: [metrics]

@@ -42,6 +42,7 @@ docker compose up -d
 
 ## systemd_exporter notes
 
+- Image `systemd_exporter` v0.7+ no longer supports `--path.procfs`; optional `/proc`-based collectors use the process namespace from `pid: host`.
 - The container runs as root and uses `pid: host` plus read-only mounts to `systemd` and D-Bus so it can read unit state from the host (not from inside an isolated PID namespace).
 - Tune which units are exported with exporter flags, for example:
   - `--systemd.collector.unit-include=yourapp\\.service|nginx\\.service`
